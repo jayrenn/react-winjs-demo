@@ -533,7 +533,7 @@ var Scores = React.createClass({
 
 ##### css/app.scss
 
-Finally, let's add some styles. First, we'll define the default app styles.
+Let's add some styles. First, we'll define the default app styles.
 ```css
 /* css/app.scss */
 .win-navbarcommand-button {
