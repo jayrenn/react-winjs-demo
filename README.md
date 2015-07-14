@@ -242,8 +242,7 @@ var App = React.createClass({
           splitViewId={splitViewId}
           paneOpened={this.state.paneOpened}
           onAfterClose={this.handleAfterClose}
-          handleTogglePane={this.handleTogglePane}
-          mode={this.state.mode} />
+          handleTogglePane={this.handleTogglePane} />
       </div>
     );
     
@@ -333,3 +332,35 @@ var App = React.createClass({
       </div>
     );
 ```
+
+Now, let's have the `SplitView` modify its pane display based on which mode is currently active.
+```javascript
+// bundles/bundle.jsx
+var App = React.createClass({
+  getInitialState: function () {
+    var mode = getMode();
+    return {
+      mode: mode,
+      paneOpened: false
+    }
+  },
+  getSplitViewConfig: function () {
+    return splitViewConfigs[this.state.mode];
+  },
+  // ...
+  render: function () {
+    // ...
+    return (
+      <ReactWinJS.SplitView
+        id={splitViewId}
+        closedDisplayMode="inline"
+        openedDisplayMode="inline"
+        paneComponent={paneComponent}
+        contentComponent={contentComponent}
+        paneOpened={this.state.paneOpened}
+        onAfterClose={this.handleAfterClose}
+        {...this.getSplitViewConfig()} />
+    );
+```
+
+##### bundles/components/Pivot.jsx
