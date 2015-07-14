@@ -32,7 +32,9 @@ Install `reactify`.
 npm install reactify --save-dev
 ```
 
-#### Setting up the workspace
+#### Setting up your workspace
+
+##### gulpfile.js/config.js
 
 Add the transpiler (works for ES6 and JSX) to `gulpfile.js/config.js` above `module.exports`.
 ```javascript
@@ -55,6 +57,8 @@ Apply the transform in `browserify.bundleConfigs`, beneath `entries: src + '/bun
 transform: [reactifyES6],
 ```
 
+##### package.json
+
 Add `"node-copy"` to `package.json` anywhere in the file.
 ```javascript
 // package.json
@@ -62,12 +66,52 @@ Add `"node-copy"` to `package.json` anywhere in the file.
   "node_modules/winjs/css/ui-light.css",
   "node_modules/winjs/js/base.min.js",
   "node_modules/winjs/js/ui.min.js"
-  ],
+],
 ```
+
+##### Housekeeping
 
 (Optional) Delete the files and folders that will be unused for this project: `html/templates`, `html/swig.html`, `bundles/vendor`.
 
 Run `gulp`.
 ```
 gulp
+```
+
+#### Creating your React app
+
+##### index.html
+
+Set your app title.
+```html
+<!-- index.html -->
+<title>React-WinJS Responsive app</title>
+```
+
+Add the WinJS references.
+```html
+<!-- index.html -->
+<title>React-WinJS Responsive app</title>
+
+<!-- WinJS references -->
+<link rel="stylesheet" href="node_modules/winjs/css/ui-light.css" />
+<script src="node_modules/winjs/js/base.min.js"></script>
+<script src="node_modules/winjs/js/ui.min.js"></script>
+
+<!-- App references -->
+<link rel="stylesheet" href="css/app.css" />
+```
+
+Turn on default intrinsic styling by adding the `win-type-body` class to `body`.
+```html
+<!-- index.html -->
+<body class="win-type-body">
+```
+
+Remove the unused markup.
+```html
+<!-- index.html -->
+<body class="win-type-body">
+  <script src="bundles/bundle.js"></script>
+</body>
 ```
