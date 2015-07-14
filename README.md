@@ -134,3 +134,202 @@ var App = React.createClass({
 
 React.render(<App />, document.body);
 ```
+
+Add a `SplitView` component.
+```javascript
+// bundles/bundle.jsx
+var splitViewId = "splitView";
+
+var App = React.createClass({
+  render: function () {
+    return (
+      <ReactWinJS.SplitView
+        id={splitViewId}
+        closedDisplayMode="inline"
+        openedDisplayMode="inline" />
+    );
+  }
+});
+```
+
+Add the pane component of the `SplitView`. Here we will use three `NavBarCommands`.
+```javascript
+// bundles/bundle.jsx
+var App = React.createClass({
+  render: function () {
+    var paneComponent = (
+      <div className="pane">
+        <div className="header">
+          <div>UEFA Champions League</div>
+        </div>
+        <div className="commands">
+          <ReactWinJS.NavBarCommand
+            label="Home"
+            icon="home" />
+          <ReactWinJS.NavBarCommand
+            label="About"
+            icon="settings" />
+          <ReactWinJS.NavBarCommand
+            label="Search"
+            icon="find"
+            id="searchCommand" />
+        </div>
+      </div>
+    );
+    
+    return (
+      <ReactWinJS.SplitView
+        id={splitViewId}
+        closedDisplayMode="inline"
+        openedDisplayMode="inline"
+        paneComponent={paneComponent} />
+    );
+  }
+});
+```
+
+Add the content component of the `SplitView`. Here we will use a `Pivot` component. Create a `components` folder, then add a `Pivot.jsx` file within it. Import that module at the top of your base component page.
+```javascript
+// bundles/bundle.jsx
+var React = require('react');
+var ReactWinJS = require('react-winjs');
+var Pivot = require('./components/Pivot.jsx');
+
+// ...
+
+var App = React.createClass({
+  render: function () {
+    // var paneComponent = ( ... );
+    var contentComponent = (
+      <div className="content">
+        <Pivot
+          splitViewId={splitViewId} />
+      </div>
+    );
+    
+    return (
+      <ReactWinJS.SplitView
+        id={splitViewId}
+        closedDisplayMode="inline"
+        openedDisplayMode="inline"
+        paneComponent={paneComponent}
+        contentComponent={contentComponent} />
+    );
+  }
+});
+```
+
+Add logic to handle the pane opening and closing.
+```javascript
+// bundles/bundle.jsx
+var App = React.createClass({
+  getInitialState: function () {
+    return {
+      paneOpened: false
+    }
+  },
+  handleTogglePane: function () {
+    this.setState({ paneOpened: !this.state.paneOpened });
+  },
+  handleAfterClose: function () {
+    this.setState({ paneOpened: false });
+  },
+  render: function () {
+    // ...
+    var contentComponent = (
+      <div className="content">
+        <Pivot
+          splitViewId={splitViewId}
+          paneOpened={this.state.paneOpened}
+          onAfterClose={this.handleAfterClose}
+          handleTogglePane={this.handleTogglePane}
+          mode={this.state.mode} />
+      </div>
+    );
+    
+    return (
+      <ReactWinJS.SplitView
+        id={splitViewId}
+        closedDisplayMode="inline"
+        openedDisplayMode="inline"
+        paneComponent={paneComponent}
+        contentComponent={contentComponent}
+        paneOpened={this.state.paneOpened}
+        onAfterClose={this.handleAfterClose} />
+    );
+  }
+});
+```
+
+Let's add some responsive design. The `SplitView` offers various customization options for displaying the pane. We can choose which settings to use based on the app screen width. We will refer to these as "modes".
+```javascript
+// bundles/bundle.jsx
+var splitViewId = "splitView";
+
+var splitViewConfigs = {
+  small: {
+    closedDisplayMode: "none",
+    openedDisplayMode: "overlay"
+  },
+  medium: {
+    closedDisplayMode: "inline",
+    openedDisplayMode: "overlay"
+  },
+  large: {
+    closedDisplayMode: "inline",
+    openedDisplayMode: "inline"
+  }
+};
+
+function getMode() {
+	return (
+    window.innerWidth <= 480 ? "small" :
+    window.innerWidth <= 1024 ? "medium" :
+    "large"
+  );
+}
+
+var App = React.createClass({
+```
+
+As you can see above, when your app has a width less than or equal to `480px`, the mode will be set as `small`. When your app has a width less than or equal to `1024px`, the mode will be set as `medium`. Any widths greater than `1024px` will result in the mode being set as `large`.
+
+Let's implement the logic to dynamically update the mode.
+```javascript
+// bundles/bundle.jsx
+var App = React.createClass({
+  getInitialState: function () {
+    var mode = getMode();
+    return {
+      mode: mode,
+      paneOpened: false
+    }
+  },
+  handleResize: function () {
+    var prevMode = this.state.mode;
+    var nextMode = getMode();
+
+    if (prevMode !== nextMode) {
+      this.setState({ mode: nextMode });
+    }
+  },
+  // ...
+  componentDidMount: function () {
+		window.addEventListener('resize', this.handleResize);
+	},
+  componentWillUnmount: function () {
+    window.removeEventListener('resize', this.handleResize);
+  },
+  render: function () {
+    // ...
+    var contentComponent = (
+      <div className="content">
+        <Pivot
+          splitViewId={splitViewId}
+          paneOpened={this.state.paneOpened}
+          onAfterClose={this.handleAfterClose}
+          handleTogglePane={this.handleTogglePane}
+          mode={this.state.mode} />
+      </div>
+    );
+```
