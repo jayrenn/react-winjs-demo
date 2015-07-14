@@ -135,7 +135,7 @@ var App = React.createClass({
 React.render(<App />, document.body);
 ```
 
-Add a `SplitView` component.
+Add the WinJS `SplitView` control.
 ```javascript
 // bundles/bundle.jsx
 var splitViewId = "splitView";
@@ -152,7 +152,7 @@ var App = React.createClass({
 });
 ```
 
-Add the pane component of the `SplitView`. Here we will use three `NavBarCommands`.
+Add the pane component of the `SplitView`. Here we will use three WinJS `NavBarCommands`.
 ```javascript
 // bundles/bundle.jsx
 var App = React.createClass({
@@ -188,7 +188,7 @@ var App = React.createClass({
 });
 ```
 
-Add the content component of the `SplitView`. Here we will use a `Pivot` component. Create a `components` folder, then add a `Pivot.jsx` file within it. Import that module at the top of your base component page.
+Add the content component of the `SplitView`. Here we will insert our `Pivot` component. Create a `components` folder, then add a `Pivot.jsx` file within it. Make sure to import the module at the top.
 ```javascript
 // bundles/bundle.jsx
 var React = require('react');
@@ -364,3 +364,49 @@ var App = React.createClass({
 ```
 
 ##### bundles/components/Pivot.jsx
+
+Let's move on to the `Pivot` module. We'll start, as always, by importing our required modules and creating the component for export.
+```javascript
+// bundles/components/Pivot.jsx
+var React = require('react');
+var ReactWinJS = require('react-winjs');
+
+var Pivot = React.createClass({
+  // Component
+});
+
+module.exports = Pivot;
+```
+
+Add the WinJS `Pivot` control.
+```javascript
+// bundles/components/Pivot.jsx
+var Pivot = React.createClass({
+  render: function () {
+    return (
+      <ReactWinJS.Pivot
+        id="pivot"
+        selectedIndex={3}
+        <ReactWinJS.Pivot.Item key="news" header="news">
+          <p>News</p>
+        </ReactWinJS.Pivot.Item>
+        <ReactWinJS.Pivot.Item key="players" header="players">
+          <p>Players</p>
+        </ReactWinJS.Pivot.Item>
+        <ReactWinJS.Pivot.Item key="clubs" header="clubs">
+          <p>Clubs</p>
+        </ReactWinJS.Pivot.Item>
+        <ReactWinJS.Pivot.Item key="scores" header="scores">
+          <p>Scores</p>
+        </ReactWinJS.Pivot.Item>
+        <ReactWinJS.Pivot.Item key="standings" header="standings">
+          <p>Standings</p>
+        </ReactWinJS.Pivot.Item>
+      </ReactWinJS.Pivot>
+		);
+	}
+});
+```
+
+In order to best take advantage of the screen real estate on large and small screens, we can add content on either side of the `Pivot` headers. Here we will add a WinJS `SplitViewPaneToggle` control on the left, and a WinJS `AutoSuggestBox` control on the right. Note: the latter control is merely for visual purposes, and will not be hooked up in this demo. For more information on how to use an `AutoSuggestBox`, visit our [Try Site samples](http://try.buildwinjs.com/#searchbox).
+
