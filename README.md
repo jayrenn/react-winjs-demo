@@ -483,3 +483,213 @@ var Pivot = React.createClass({
 ```
 
 ##### bundles/components/Scores.jsx
+
+Import the required module and our sample data. Create the component for export.
+``` javascript
+// bundles/components/Scores.jsx
+var React = require('react');
+var Data = require('../../js/data.js');
+
+var Scores = React.createClass({
+  // Component
+});
+
+module.exports = Scores;
+```
+
+Here we will take the data and iterate through each line item, rendering a DOM element for each line item.
+```javascript
+// bundles/components/Scores.jsx
+var Scores = React.createClass({
+	render: function () {
+    var fixtureNodes = Data.fixtures.map(function (fixture, i) {
+      return (
+        <div className="fixture" key={i}>
+          <div className="date">{fixture.date}</div>
+          <div className="scores">
+            <div className="team" className={fixture.homeClass}>
+              <div className="logo"><img src={fixture.homeTeam.logo} /></div>
+              <div className="name">{fixture.homeTeam.name}</div>
+              <div className="score">{fixture.homeScore}</div>
+            </div>
+            <div className="team" className={fixture.awayClass}>
+              <div className="logo"><img src={fixture.awayTeam.logo} /></div>
+              <div className="name">{fixture.awayTeam.name}</div>
+              <div className="score">{fixture.awayScore}</div>
+            </div>
+          </div>
+          <div className="description">{fixture.description}</div>
+        </div>
+      );
+    });
+    return (
+      <div id="fixturesRepeater">
+        {fixtureNodes}
+      </div>
+    );
+  }
+});
+```
+
+##### css/app.scss
+
+Finally, let's add some styles. First, we'll define the default app styles.
+```css
+/* css/app.scss */
+.win-navbarcommand-button {
+  background-color: transparent;
+}
+
+.win-splitviewpanetoggle {
+  float: left;
+}
+
+#splitView {
+  min-width: 320px;
+}
+
+#splitView .pane {
+  background-color: #333;
+  color: #FFF;
+}
+
+.win-splitview-panewrapper,
+.win-splitview-pane,
+#splitView .pane {
+  height: 100%;
+}
+
+#splitView .pane .header {
+  white-space: nowrap;
+}
+
+#splitView .pane .header .win-splitviewpanetoggle {
+  color: #FFF;
+}
+
+#splitView .pane .header div {
+  display: inline-block;
+  font-size: 22px;
+  margin: 10px;
+}
+
+#splitView .pane .commands .win-navbarcommand-button:hover,
+#splitView .pane .header .win-splitviewpanetoggle:hover {
+  background-color: #666;
+}
+
+#splitView .pane .commands .win-navbarcommand-button-content {
+  color: #FFF;
+}
+
+#splitView .content {
+  height: 100%;
+}
+
+#splitView .content .right {
+  margin-right: 12px;
+}
+
+#splitView .content .win-pivot .win-pivot-header {
+  margin-top: 10px;
+}
+
+#splitView .content .win-pivot .win-pivot-header-leftcustom {
+  margin: 0;
+}
+
+#splitView .content .win-pivot .win-pivot-header-rightcustom {
+  margin-top: 9px;
+}
+
+.win-pivot.win-pivot-nosnap .win-pivot-viewport {
+  height: 100%;
+  overflow-y: scroll;
+}
+```
+
+Next, we'll add on to our responsive design and add some screen size-specific styling.
+```css
+/* css/app.scss */
+
+/* When the pane is closed, hide the AutoSuggestBox and show the search button */
+@media screen and (max-width: 824px) {
+  #splitView .content #pivot.paneClosed .right {
+    display: none;
+  }
+}
+
+/* When the pane is closed, show the AutoSuggestBox and hide the search button */
+@media screen and (min-width: 824px) {
+  #splitView.win-splitview-pane-closed .pane .commands #searchCommand {
+    display: none;
+  }
+}
+
+/* When the pane is opened, hide the AutoSuggestBox and show the search button */
+@media screen and (max-width: 1100px) {
+  #splitView .content #pivot.paneOpened .right {
+    display: none;
+  }
+}
+
+/* When the pane is opened, show the AutoSuggestBox and hide the search button */
+@media screen and (min-width: 1100px) {
+  #splitView.win-splitview-pane-opened .pane .commands #searchCommand {
+    display: none;
+  }
+}
+```
+
+Finally, we'll style the content.
+```css
+#fixturesRepeater {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.fixture {
+  flex: 1 0 250px;
+  min-width: 200px;
+  max-width: 369px;
+  margin: 5px;
+  padding: 10px;
+  display: inline-block;
+  background-color: #f2f2f2;;
+  font-family: Segoe UI Light;
+  text-align: left;
+}
+
+.fixture .date,
+.fixture .description {
+  color: #999;
+}
+
+.fixture .scores  {
+  padding: 5px 0;
+  font-size: 20px;
+}
+
+.fixture .scores .winner {
+  font-family: Segoe UI;
+}
+
+.fixture .scores .logo {
+  display: inline-block;
+  position: relative;
+  top: 3px;
+}
+
+.fixture .scores .name {
+  display: inline-block;
+  padding-left: 5px;
+}
+
+.fixture .scores .score {
+  float: right;
+  text-align: right;
+  position: relative;
+  top: 2px;
+}
+```
