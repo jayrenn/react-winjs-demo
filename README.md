@@ -1,9 +1,9 @@
 React-WinJS Responsive app
 ============
 
-## Instructions
+### Instructions
 
-### Prerequisites
+#### Installing the prerequisites
 
 Install `npm` and `git`.
 
@@ -31,6 +31,8 @@ Install `reactify`.
 ```
 npm install reactify --save-dev
 ```
+
+#### Setting up the workspace
 
 Add the transpiler (works for ES6 and JSX) to `gulpfile.js/config.js` above `module.exports`.
 ```javascript
