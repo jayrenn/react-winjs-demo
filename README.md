@@ -409,4 +409,77 @@ var Pivot = React.createClass({
 ```
 
 In order to best take advantage of the screen real estate on large and small screens, we can add content on either side of the `Pivot` headers. Here we will add a WinJS `SplitViewPaneToggle` control on the left, and a WinJS `AutoSuggestBox` control on the right. Note: the latter control is merely for visual purposes, and will not be hooked up in this demo. For more information on how to use an `AutoSuggestBox`, visit our [Try Site samples](http://try.buildwinjs.com/#searchbox).
+```javascript
+// bundles/components/Pivot.jsx
+var Pivot = React.createClass({
+  render: function () {
+    var customLeftHeaderComponent = (
+      <div className="left">
+        <ReactWinJS.SplitViewPaneToggle
+          aria-controls={this.props.splitViewId}
+          onInvoked={this.props.handleTogglePane} />
+        </div>
+    );
+    var customRightHeaderComponent = (
+      <div className="right">
+        <ReactWinJS.AutoSuggestBox
+          placeholderText="Search sports, teams, or players..." />
+      </div>
+    );
+    
+		return (
+      <ReactWinJS.Pivot
+        id="pivot"
+        selectedIndex={3}
+        customLeftHeaderComponent={customLeftHeaderComponent}
+        customRightHeaderComponent={customRightHeaderComponent}>
+```
 
+Let's add some additional responsive design, and some helper class names for when we get to the CSS.
+```javascript
+// bundles/components/Pivot.jsx
+var Pivot = React.createClass({
+  handleModeChange: function () {
+    return this.props.mode == "small" ? "block" : "none";
+  },
+  handlePaneChange: function () {
+    return this.props.paneOpened ? "paneOpened" : "paneClosed";
+  },
+	render: function () {
+    var customLeftHeaderComponent = (
+      <div className="left">
+        <ReactWinJS.SplitViewPaneToggle
+          aria-controls={this.props.splitViewId}
+          onInvoked={this.props.handleTogglePane}
+          style={{display: this.handleModeChange()}} />
+        </div>
+    );
+    // ...
+    return (
+      <ReactWinJS.Pivot
+        id="pivot"
+        className={this.handlePaneChange()}
+        selectedIndex={3}
+        customLeftHeaderComponent={customLeftHeaderComponent}
+        customRightHeaderComponent={customRightHeaderComponent}>
+```
+
+Now, let's add some content to one of the `Pivot` items. Add a `Scores.jsx` file to the `components` folder. Import that module at the top of your page. Replace `<p>Scores</p> with the new component.
+```javascript
+// bundles/components/Pivot.jsx
+var React = require('react');
+var ReactWinJS = require('react-winjs');
+var Scores = require('./Scores.jsx');
+
+var Pivot = React.createClass({
+  // ...
+  render: function () {
+    // ...
+    return (
+      // ...
+        <ReactWinJS.Pivot.Item key="scores" header="scores">
+          <Scores />
+        </ReactWinJS.Pivot.Item>
+```
+
+##### bundles/components/Scores.jsx
