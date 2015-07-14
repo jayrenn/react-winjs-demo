@@ -5,9 +5,9 @@ React-WinJS Responsive app
 
 [View the instructions](https://github.com/jayrenn/react-winjs-demo/wiki/Instructions).
 
-#### Responsive design
+### Responsive design
 
-This demo will showcase some of the options you, as the developer, have when using React-WinJS, JavaScript, and CSS. When you resize your window, or view on different device sizes, the app will adjust its layout to best utilize the available screen real estate.
+This demo will showcase some of the options you, as the developer, have when using [React-WinJS](https://github.com/winjs/react-winjs), JavaScript, and CSS. When you resize your window, or view on different device sizes, the app will adjust its layout to best utilize the available screen real estate.
 
 Here are some examples of the different changes you will see:
 
