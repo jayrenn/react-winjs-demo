@@ -80,17 +80,17 @@ gulp
 
 #### Creating your React app
 
-##### index.html
+##### html/index.html
 
 Set your app title.
 ```html
-<!-- index.html -->
+<!-- html/index.html -->
 <title>React-WinJS Responsive app</title>
 ```
 
 Add the WinJS references.
 ```html
-<!-- index.html -->
+<!-- html/index.html -->
 <title>React-WinJS Responsive app</title>
 
 <!-- WinJS references -->
@@ -104,14 +104,33 @@ Add the WinJS references.
 
 Turn on default intrinsic styling by adding the `win-type-body` class to `body`.
 ```html
-<!-- index.html -->
+<!-- html/index.html -->
 <body class="win-type-body">
 ```
 
 Remove the unused markup.
 ```html
-<!-- index.html -->
+<!-- html/index.html -->
 <body class="win-type-body">
   <script src="bundles/bundle.js"></script>
 </body>
+```
+
+##### bundles/bundle.jsx
+
+Import your required modules.
+```javascript
+// bundles/bundle.jsx
+var React = require('react');
+var ReactWinJS = require('react-winjs');
+```
+
+Create your base component, which will render in the document `body`.
+```javascript
+// bundles/bundle.jsx
+var App = React.createClass({
+  // Component
+});
+
+React.render(<App />, document.body);
 ```
