@@ -18,7 +18,8 @@
   "node-copy": [
     "node_modules/winjs/css/ui-light.css",
     "node_modules/winjs/js/base.min.js",
-    "node_modules/winjs/js/ui.min.js"
+    "node_modules/winjs/js/ui.min.js",
+    "node_modules/winjs/fonts/Symbols.ttf"
   ],
   "devDependencies": {
     "browser-sync": "^2.7.6",
