@@ -83,21 +83,21 @@ Screen size-specific styling
 
 /* When the pane is closed, hide the AutoSuggestBox and show the search button */
 @media screen and (max-width: 824px) {
-  #splitView .content #pivot.paneClosed .right {
+  #splitView .content #pivot .right {
     display: none;
   }
 }
 
 /* When the pane is closed, show the AutoSuggestBox and hide the search button */
 @media screen and (min-width: 824px) {
-  #splitView.win-splitview-pane-closed .pane .commands #searchCommand {
+  #splitView .pane .commands #searchCommand {
     display: none;
   }
 }
 
 /* When the pane is opened, hide the AutoSuggestBox and show the search button */
 @media screen and (max-width: 1100px) {
-  #splitView .content #pivot.paneOpened .right {
+  #splitView.win-splitview-openeddisplayinline .content #pivot.paneOpened .right {
     display: none;
   }
 }
