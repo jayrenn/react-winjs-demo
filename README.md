@@ -11,6 +11,8 @@ This demo will showcase some of the options you, as the developer, have when usi
 
 Here are some examples of the different changes you will see:
 
+#### Microsoft Edge
+
 ![Large screen](https://raw.githubusercontent.com/wiki/jayrenn/react-winjs-demo/images/large.png)
 
 On larger screens, the [SplitView](http://try.buildwinjs.com/#splitview) pane will push the content to the side, allowing you to freely interact with the content.
@@ -34,3 +36,13 @@ When the [Pivot](http://try.buildwinjs.com/#pivot) headers become clipped, they 
 ![Small screen](https://raw.githubusercontent.com/wiki/jayrenn/react-winjs-demo/images/small.png)
 
 Finally, on the smallest devices, the SplitView pane will hide itself, leaving just the SplitViewPaneToggle control. Clicking the toggle will open and close the pane, with the former action overlaying the content.
+
+#### iPhone 5s
+
+Here are some examples of what the app looks like on an iPhone 5s:
+
+Portrait:
+![Portrait mode](https://raw.githubusercontent.com/wiki/jayrenn/react-winjs-demo/images/iphone5s-portrait.jpg)
+
+Landscape:
+![Landscape mode](https://raw.githubusercontent.com/wiki/jayrenn/react-winjs-demo/images/iphone5s-landscape.jpg)
