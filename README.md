@@ -42,7 +42,9 @@ Finally, on the smallest devices, the SplitView pane will hide itself, leaving j
 Here are some examples of what the app looks like on an iPhone 5s:
 
 Portrait:
-![Portrait mode](https://raw.githubusercontent.com/wiki/jayrenn/react-winjs-demo/images/iphone5s-portrait.jpg)
+
+<img width="320" height="568" src="https://raw.githubusercontent.com/wiki/jayrenn/react-winjs-demo/images/iphone5s-portrait.jpg">
 
 Landscape:
-![Landscape mode](https://raw.githubusercontent.com/wiki/jayrenn/react-winjs-demo/images/iphone5s-landscape.jpg)
+
+<img width="568" height="320" src="https://raw.githubusercontent.com/wiki/jayrenn/react-winjs-demo/images/iphone5s-landscape.jpg">
