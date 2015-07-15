@@ -127,7 +127,7 @@ Content styling
   padding: 10px;
   display: inline-block;
   background-color: #f2f2f2;;
-  font-family: Segoe UI Light;
+  font-family: Segoe UI Light, Helvetica;
   text-align: left;
 }
 
@@ -142,7 +142,8 @@ Content styling
 }
 
 .fixture .scores .winner {
-  font-family: Segoe UI;
+  font-family: Segoe UI, Helvetica;
+  font-weight: 600;
 }
 
 .fixture .scores .logo {
