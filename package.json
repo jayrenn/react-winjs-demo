@@ -1,7 +1,7 @@
 {
-  "name": "gulp-appx",
+  "name": "react-winjs-demo",
   "version": "0.0.2",
-  "description": "Gulp build system for Windows 10 Apps",
+  "description": "React-WinJS Responsive app",
   "repository": {
     "type": "git",
     "url": ""
