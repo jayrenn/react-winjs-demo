@@ -95,7 +95,7 @@ Screen size-specific styling
   }
 }
 
-/* When the pane is opened, hide the AutoSuggestBox and show the search button */
+/* When the pane is opened and inline, hide the AutoSuggestBox and show the search button */
 @media screen and (max-width: 1100px) {
   #splitView.win-splitview-openeddisplayinline .content #pivot.paneOpened .right {
     display: none;
